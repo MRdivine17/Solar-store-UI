@@ -1,0 +1,410 @@
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: transparent;
+  color: #333;
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container */
+.shop-container {
+  background: linear-gradient(135deg, #87cefa, #ffffff); /* Blue gradient inside */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 1000px;
+  height: 650px;
+  display: none;
+  gap: 20px;
+  overflow: hidden;
+  position: relative; /* Add this line */
+}
+
+
+/* Sidebar */
+.sidebar {
+  background-color: #f5fafc ;
+  padding: 20px;
+  border-radius: 12px;
+  width: 200px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #3366cc;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #eef2f6;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+/* Main Section */
+.main-section {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height:100%
+}
+
+.top-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+/* Content Grid Layout */
+.main-content-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  flex: 1;               /* Add this */
+  min-height: 0;         /* Add this to allow children to scroll */
+}
+/* Items Container with vertical scroll only */
+.items-grid,
+.items-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-height: 480px;        /* Or any desired height */
+  overflow-y: scroll;       /* Always show scrollbar */
+  overflow-x: hidden;
+  padding-right: 6px;
+}
+
+/* Scrollbar styling */
+.items-grid::-webkit-scrollbar,
+.items-container::-webkit-scrollbar {
+  width: 6px;
+}
+.items-grid::-webkit-scrollbar-thumb,
+.items-container::-webkit-scrollbar-thumb {
+  background-color: #66aaff;
+  border-radius: 3px;
+}
+.items-grid::-webkit-scrollbar-track,
+.items-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Item Card - Square & Smaller */
+.item-card {
+  width: 160px;
+  height: 200px;
+  padding: 15px;
+  background-color:  #fdfdfd; /* soft blue pastel */
+  border: 1px solid #e5e9f0; /* subtle border */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+
+.item-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.item-card h3 {
+  font-size: 13px;
+  color: #222;
+}
+
+.item-card p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+}
+
+.item-card button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+
+.item-card button:hover {
+  background-color: #1e4fc3;
+}
+
+.item-card:hover {
+  transform: scale(1.02);
+}
+/* Cart Box */
+.cart-box {
+  width: 250px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  align-self: flex-start; /* makes it stay at the top */
+  margin-left: 20px; /* spacing from the items grid */
+  flex-shrink: 0;
+}
+
+/* Cart Items */
+.cart-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;             /* Enable scroll when height exceeds */
+  overflow-y: auto;
+  padding-right: 4px;            /* Prevent scrollbar from overlapping content */
+}
+
+/* Custom Scrollbar Styling (WebKit-based browsers) */
+.cart-items-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items-list::-webkit-scrollbar-thumb {
+  background-color: #a0c4ff;     /* Soft blue scrollbar thumb */
+  border-radius: 3px;
+}
+
+.cart-items-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+  white-space: nowrap;  /* prevent text from wrapping */
+  overflow: hidden;
+}
+
+.item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #222;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+.item-price {
+  color: #e53935;
+  font-size: 13px;
+  margin-left: 8px;
+  min-width: 50px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Quantity Controls */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  border-radius: 8px;
+  background-color: #eee;
+  flex-shrink: 0;
+}
+
+.quantity-controls button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.quantity-controls button:hover {
+  background-color: #ddd;
+}
+
+.quantity-controls span {
+  color: #333;
+  padding: 0 8px;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Cart Total */
+.cart-total {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #3366cc;
+  text-align: right;
+}
+
+/* Proceed Button */
+.proceed-btn {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #e53935;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.proceed-btn:hover {
+  background-color: #c62828;
+}
+
+/* Bill Popup */
+.bill-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none;
+}
+
+.bill-popup.show {
+  display: block;
+}
+
+.bill-content h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #222;
+}
+
+.bill-content p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.bill-items-list {
+  margin-top: 10px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.bill-items-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #ddd;
+  font-size: 14px;
+}
+
+.bill-total {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+  color: #3366cc;
+}
+
+/* Payment Buttons */
+.payment-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pay-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.pay-btn.cash {
+  background-color: #43a047;
+  color: white;
+}
+
+.pay-btn.cash:hover {
+  background-color: #2e7d32;
+}
+
+.pay-btn.bank {
+  background-color: #1976d2;
+  color: white;
+}
+
+.pay-btn.bank:hover {
+  background-color: #0d47a1;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .items-grid,
+  .items-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+/* Ensure UI is hidden by default */
+.main-container {
+  display: none;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop UI - GTA 5 FiveM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="shop-container" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Categories</h2>
+      <ul>
+        <li class="active" onclick="filterItems('all')">All Items</li>
+        <li onclick="filterItems('food')">Food</li>
+        <li onclick="filterItems('mechanic')">Mechanic</li>
+        <li onclick="filterItems('weapons')">Weapons</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-section">
+      <div class="top-header">
+        <h1 id="playerName">Hello, Customer </h1>
+      </div>
+
+      <div class="main-content-grid">
+        <!-- Items Section -->
+        <div class="items-grid" id="items">
+          <p id="no-items-msg" style="display: none;">No items available in this category.</p>
+        </div>
+
+        <!-- Cart Section -->
+        <div class="cart-box">
+          <h2>🛒 Your Cart</h2>
+          <div id="cart-items" class="cart-items-list"></div>
+          <div class="cart-total">
+            Total: ₹<span id="total-amount">0</span>
+          </div>
+          <button id="proceed-btn" class="proceed-btn" type="button" onclick="showBill()">Proceed</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Bill Section -->
+  <div id="bill" class="bill-popup hidden">
+    <div class="bill-content">
+      <button class="close-bill" onclick="closeBill()" aria-label="Close Bill">✖</button>
+      <h2>🧾 Purchase Receipt</h2>
+      <p>Customer Name: <span id="bill-customer"></span></p>
+      <p>Shop: <span id="bill-shop"></span></p>
+      <p>Date: <span id="bill-date"></span></p>
+      <ul id="bill-items" class="bill-items-list"></ul>
+      <hr />
+      <div class="bill-total">
+        <strong>Total</strong>: <span id="bill-total">0</span>
+      </div>
+      <div class="payment-buttons">
+        <button class="pay-btn cash" type="button">Pay Cash</button>
+        <button class="pay-btn bank" type="button">Pay Bank</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
