@@ -11,6 +11,38 @@ end
 
 print("[SERVER] server.lua loaded ✅")
 
+-- ✅ Version Checker
+local CURRENT_VERSION = "1.0.1"
+local GITHUB_RAW_URL = "https://raw.githubusercontent.com/MRdivine17/Solar-store-UI/main/solar_freeshop-esx/version.json"
+
+CreateThread(function()
+    Wait(2000)
+    PerformHttpRequest(GITHUB_RAW_URL, function(statusCode, response, headers)
+        if statusCode == 200 then
+            local success, data = pcall(json.decode, response)
+            if success and data and data.version then
+                if data.version ~= CURRENT_VERSION then
+                    print("^3========================================^0")
+                    print("^3[VERSION CHECK] UPDATE AVAILABLE!^0")
+                    print("^3Current Version: ^1" .. CURRENT_VERSION .. "^0")
+                    print("^3Latest Version: ^2" .. data.version .. "^0")
+                    if data.changelog then
+                        print("^3Changelog: ^0" .. data.changelog)
+                    end
+                    print("^3Update at: https://github.com/MRdivine17/Solar-store-UI^0")
+                    print("^3========================================^0")
+                else
+                    print("^2[VERSION CHECK] You are running the latest version (" .. CURRENT_VERSION .. ")^0")
+                end
+            else
+                print("^1[VERSION CHECK] Failed to parse version data^0")
+            end
+        else
+            print("^1[VERSION CHECK] Failed to check for updates (Status: " .. statusCode .. ")^0")
+        end
+    end, "GET")
+end)
+
 -- Grab ESX
 TriggerEvent('esx:getSharedObject', function(obj)
     ESX = obj

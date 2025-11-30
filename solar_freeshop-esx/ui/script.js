@@ -166,17 +166,6 @@ function showBill(customerName, shopName) {
 
   billTotal.textContent = `₹${total}`;
   billDiv.classList.add("show");
-
-  document.querySelector(".proceed-btn")?.addEventListener("click", () => {
-    fetch(`https://${GetParentResourceName()}/requestBillData`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        shopId: currentShopId,
-        cart: cartItems,
-      })
-    });
-  });
 }
 
 
@@ -196,45 +185,47 @@ document.addEventListener("DOMContentLoaded", () => {
   cartItemsContainer = document.getElementById("cart-items");
   totalAmount = document.getElementById("total-amount");
 
-document.querySelector(".pay-btn.cash")?.addEventListener("click", () => {
-  fetch(`https://${GetParentResourceName()}/completePurchase`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ method: "cash", cart: cartItems })
-  }).then(() => {
-    resetCart();
-    closeShopUI();
-    closeBill(); // 👈 CLOSE THE BILL UI HERE
-  });
-});
-
-
-document.querySelector(".pay-btn.bank")?.addEventListener("click", () => {
-  fetch(`https://${GetParentResourceName()}/completePurchase`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ method: "bank", cart: cartItems })
-  }).then(() => {
-    resetCart();
-    closeShopUI();
-    closeBill(); // 👈 CLOSE THE BILL UI HERE
-  });
-});
-
-
-  document.querySelector("#close-btn")?.addEventListener("click", () => {
-    fetch(`https://${GetParentResourceName()}/closeUI`, {
+  document.querySelector(".pay-btn.cash")?.addEventListener("click", () => {
+    fetch(`https://${GetParentResourceName()}/completePurchase`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ method: "cash", cart: cartItems })
+    }).then(() => {
+      resetCart();
+      closeBill();
+      closeShopUI();
     });
-    resetCart();
-    closeShopUI();
+  });
+
+  document.querySelector(".pay-btn.bank")?.addEventListener("click", () => {
+    fetch(`https://${GetParentResourceName()}/completePurchase`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ method: "bank", cart: cartItems })
+    }).then(() => {
+      resetCart();
+      closeBill();
+      closeShopUI();
+    });
+  });
+
+  document.querySelector(".close-bill")?.addEventListener("click", closeBill);
+  
+  document.querySelector(".proceed-btn")?.addEventListener("click", () => {
+    const playerName = document.getElementById("playerName")?.textContent || "Customer";
+    const shopName = "Shop";
+    showBill(playerName, shopName);
+  });
+
+  document.querySelectorAll(".sidebar li").forEach(li => {
+    li.addEventListener("click", function() {
+      document.querySelectorAll(".sidebar li").forEach(item => item.classList.remove("active"));
+      this.classList.add("active");
+      const category = this.getAttribute("data-category");
+      filterItems(category);
+    });
   });
 });
-
-function closeBill() {
-  document.getElementById("bill").classList.remove("show");
-}
 
 
 // ✅ UI opens only via ox_target → openShop event

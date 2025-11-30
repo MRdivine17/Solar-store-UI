@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Solar SCRIPTS | Solar Development Team'
 description 'Dynamic Shop UI - NUI Based'
-version '1.0.0'
+version '1.0.1'
 
 lua54 'yes'
 
@@ -13,7 +13,8 @@ files {
     'ui/index.html',
     'ui/styles.css',
     'ui/script.js',
-    'ui/images/*.png'
+    'ui/images/*.png',
+    'version.json'
 }
 
 shared_script 'config.lua'  

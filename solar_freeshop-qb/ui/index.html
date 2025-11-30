@@ -12,10 +12,10 @@
     <aside class="sidebar">
       <h2>Categories</h2>
       <ul>
-        <li class="active" onclick="filterItems('all')">All Items</li>
-        <li onclick="filterItems('food')">Food</li>
-        <li onclick="filterItems('mechanic')">Mechanic</li>
-        <li onclick="filterItems('weapons')">Weapons</li>
+        <li class="active" data-category="all">All Items</li>
+        <li data-category="food">Food</li>
+        <li data-category="mechanic">Mechanic</li>
+        <li data-category="weapons">Weapons</li>
       </ul>
     </aside>
 
@@ -38,7 +38,7 @@
           <div class="cart-total">
             Total: ₹<span id="total-amount">0</span>
           </div>
-          <button id="proceed-btn" class="proceed-btn" type="button" onclick="showBill()">Proceed</button>
+          <button id="proceed-btn" class="proceed-btn" type="button">Proceed</button>
         </div>
       </div>
     </main>
@@ -47,7 +47,7 @@
   <!-- Bill Section -->
   <div id="bill" class="bill-popup hidden">
     <div class="bill-content">
-      <button class="close-bill" onclick="closeBill()" aria-label="Close Bill">✖</button>
+      <button class="close-bill" aria-label="Close Bill">✖</button>
       <h2>🧾 Purchase Receipt</h2>
       <p>Customer Name: <span id="bill-customer"></span></p>
       <p>Shop: <span id="bill-shop"></span></p>
